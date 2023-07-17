@@ -15,7 +15,7 @@ router
     childController.addNewChild
   )
   .patch(
-    authMiddleWare.isAdminOrSupervisor,
+    authMiddleWare.isAdminOrTeacher,
     validation.putValidationArr,
     validator,
     childController.updateChild
