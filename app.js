@@ -12,7 +12,7 @@ dotenv.config();
 const server = express();
 let port = process.env.PORT || 3000;
 mongoose
-  .connect("mongodb://127.0.0.1:27017/NUERSERYSYSTEM")
+  .connect(process.env.DB_HOST)
   .then(() => {
     console.log("db connected");
     server.listen(port, () => {
