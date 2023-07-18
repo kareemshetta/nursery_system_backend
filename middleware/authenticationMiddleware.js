@@ -11,7 +11,11 @@ module.exports = (request, response, next) => {
     request.credential = decodedToken;
     next();
   } catch (err) {
-    next(err);
+    if (err.message === 'Authorization header is missing') {
+      response.status(401).send('Authorization header is missing');
+    } else {
+      next(err);
+    }
   }
 };
 
