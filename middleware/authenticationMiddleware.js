@@ -1,7 +1,11 @@
 const jwt = require("jsonwebtoken");
 module.exports = (request, response, next) => {
   try {
-    const token = request.headers.authorization.split(" ")[1];
+    const authHeader = request.headers.authorization;
+    if (!authHeader) {
+      throw new Error('Authorization header is missing');
+    }
+    const token = authHeader.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.secretKey);
     console.log(decodedToken);
     request.credential = decodedToken;
